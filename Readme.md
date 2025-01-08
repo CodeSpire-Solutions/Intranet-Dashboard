@@ -17,6 +17,11 @@
 - Error 5: File not found.
 - Error 6: Folder already exists.
 
+#### How to setup:
+
+1. Setup the Website with a .htaccess and .htpasswd to secure it with a user and a password. (Website will not work if you didnt setup this) 
+2. Copy the files to the WebSpace Storage and youre ready to go.
+
 #### Current Builds:
 
 - [Stable:](https://github.com/CodeSpire-Solutions/Intranet-Dashboard/releases/tag/1.0) Release
