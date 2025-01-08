@@ -10,12 +10,12 @@
 
 #### Error Table:
 
-Error 1: The file already exists or the new name is invalid.
-Error 2: Failed to rename the file.
-Error 3: Failed to compress file.
-Error 4: No file selected for upload.
-Error 5: File not found.
-Error 6: Folder already exists.
+- Error 1: The file already exists or the new name is invalid.
+- Error 2: Failed to rename the file.
+- Error 3: Failed to compress file.
+- Error 4: No file selected for upload.
+- Error 5: File not found.
+- Error 6: Folder already exists.
 
 #### Current Builds:
 
