@@ -1,4 +1,12 @@
 <?php
+if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+    // Save password hash if provided
+    if (!empty($_POST['filePassword'])) {
+        $hash = password_hash($_POST['filePassword'], PASSWORD_DEFAULT);
+        file_put_contents($target_file . '.meta', $hash);
+    }
+    // ...existing code...
+}
 // Ensure the user is authenticated by the server
 if (!isset($_SERVER['PHP_AUTH_USER'])) {
     header('HTTP/1.0 401 Unauthorized');

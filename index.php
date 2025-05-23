@@ -37,6 +37,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['newFileName']) && isse
         echo "Error 1: The file already exists or the new name is invalid.";
     }
 }
+
+// Check if current folder is password protected
+$metaFile = $fullPath . '.meta';
+if (file_exists($metaFile)) {
+    session_start();
+    $unlockedKey = 'unlocked_' . md5($fullPath);
+    if (
+        !isset($_SESSION[$unlockedKey]) ||
+        $_SESSION[$unlockedKey] !== true
+    ) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['folderUnlockPassword'])) {
+            $hash = file_get_contents($metaFile);
+            if (password_verify($_POST['folderUnlockPassword'], $hash)) {
+                $_SESSION[$unlockedKey] = true;
+                header("Location: index.php?dir=" . urlencode($currentDir));
+                exit;
+            } else {
+                $unlockError = "Incorrect password!";
+            }
+        }
+        ?>
+        <form method="post">
+            <h2>This folder is password protected.</h2>
+            <?php if (!empty($unlockError)) echo "<p style='color:red;'>$unlockError</p>"; ?>
+            <input type="password" name="folderUnlockPassword" placeholder="Enter password" required>
+            <button type="submit">Unlock</button>
+        </form>
+        </body></html>
+        <?php exit; }
+}
 ?>
 
 <!DOCTYPE html>
@@ -57,21 +87,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['newFileName']) && isse
         <a href="index.php?dir=<?= dirname($currentDir) ?>">⬅️ Zurück</a>
     <?php endif; ?>
     
-    <!-- Create Folder Section -->
-    <h2>Create Folder</h2>
-    <form action="create_folder.php" method="post">
-        <input type="hidden" name="currentDir" value="<?= $currentDir ?>">
-        <input type="text" name="folderName" placeholder="Foldername" required>
-        <button type="submit">Create Folder</button>
-    </form>
-    
-    <!-- File Upload Section -->
-    <h2>Upload File</h2>
-    <form action="upload.php" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="currentDir" value="<?= $currentDir ?>">
-        <input type="file" name="fileToUpload" required>
-        <button type="submit">Upload</button>
-    </form>
+    <!-- ...existing code... -->
+<!-- Create Folder Section -->
+<h2>Create Folder</h2>
+<form action="create_folder.php" method="post">
+    <input type="hidden" name="currentDir" value="<?= $currentDir ?>">
+    <input type="text" name="folderName" placeholder="Foldername" required>
+    <input type="password" name="folderPassword" placeholder="Password (optional)">
+    <button type="submit">Create Folder</button>
+</form>
+
+<!-- File Upload Section -->
+<h2>Upload File</h2>
+<form action="upload.php" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="currentDir" value="<?= $currentDir ?>">
+    <input type="file" name="fileToUpload" required>
+    <input type="password" name="filePassword" placeholder="Password (optional)">
+    <button type="submit">Upload</button>
+</form>
+<!-- ...existing code... -->
     
     <!-- Folder List -->
     <h2>Folder</h2>
