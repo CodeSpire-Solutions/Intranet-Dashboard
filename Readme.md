@@ -1,5 +1,8 @@
 # Intranet-Dashboard
 
+### Latest Update 1.1:
+> New Function: Password Protected Directories
+
 #### Description
 
 > A simple, easy to use and free Intranet Dashboard Site.
