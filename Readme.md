@@ -27,7 +27,7 @@
 
 #### Current Builds:
 
-- [Stable:](https://github.com/CodeSpire-Solutions/Intranet-Dashboard/releases/tag/1.0) Release
+- [Stable:](https://github.com/CodeSpire-Solutions/Intranet-Dashboard/releases/tag/1.1) Release
 
 ## License & Copyright
 
