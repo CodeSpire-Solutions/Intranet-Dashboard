@@ -9,7 +9,7 @@
 
 #### Current Contributers:
 
-- [John Deo](https://github.com/Kartoffelspalt) – Head Contributer
+- [Kartoffelspalt](https://github.com/Kartoffelspalt) – Head Contributer
 
 #### Error Table:
 
